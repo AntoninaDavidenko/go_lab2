@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор викидів</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Скрываем стрелочки в number input */
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow">
+                    <div class="card-header ">
+                        <h1 class="h3 mb-0">Лабораторна робота 2</h1>
+                    </div>
+                    <div class="card-body">
+                        <form method="post">
+                            <div class="mb-3">
+                                <label class="form-label">Донецьке газове вугілля марки ГР, т:</label>
+                                <input type="number" step="0.01" class="form-control" name="coal" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Високосірчистий мазут марки 40, т:</label>
+                                <input type="number" step="0.01" class="form-control" name="fuelOil" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Природний газ із газопроводу Уренгой-Ужгород, т:</label>
+                                <input type="number" step="0.01" class="form-control" name="gas" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Розрахувати</button>
+                        </form>
+
+                        {{ if .KCoal }}
+                        <div class="mt-4">
+                            <h2 class="h4 mb-3">Результати розрахунку:</h2>
+                            <div class="alert alert-info mt-3">
+                                <p class="mb-0">Показник емісії твердих частинок при спалюванні вугілля становитиме: {{ printf "%.2f" .KCoal }} г/ГДж;</p>
+                                <p class="mb-0">Валовий викид при спалюванні вугілля становитиме: {{ printf "%.3f" .ECoal }} т.</p>
+                                <p class="mb-0">Показник емісії твердих частинок при спалюванні мазуту становитиме: {{ printf "%.2f" .KFuelOil }} г/ГДж;</p>
+                                <p class="mb-0">Валовий викид при спалюванні мазуту становитиме: {{ printf "%.3f" .EFuelOil }} т.</p>
+                                <p class="mb-0">Оскільки при спалюванні природного газу тверді частинки відсутні, показник емісії твердих частинок та валовий викид при спалюванні природного газу становитимуть 0.</p>
+                            </div>
+                        </div>
+                        {{ end }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
